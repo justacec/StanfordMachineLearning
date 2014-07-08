@@ -12,17 +12,13 @@ figure; hold on;
 %               examples and 'ko' for the negative examples.
 %
 
+admit = find(y == 1);
+noadmit = find(y == 0);
 
-
-
-
-
-
-
+plot(X(admit,1), X(admit,2), 'k+', 'LineWidth', 2, 'MarkerSize', 7)
+plot(X(noadmit,1), X(noadmit,2), 'ko', 'MarkerFaceColor', 'y', 'MarkerSize', 7)
 
 % =========================================================================
-
-
 
 hold off;
 
