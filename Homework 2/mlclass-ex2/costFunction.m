@@ -20,10 +20,12 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+theta = theta(:);
+y = y(:);
+x = X * theta;
 
-
-
-
+J = (1.0 / length(y)) * sum((-1.0*y.*log(sigmoid(x))-((1-y).*log(1-sigmoid(x)))));
+grad = cell2mat(arrayfun(@(n) {(1.0 / length(y)) * sum((sigmoid(x)-y).*X(:,n))}, 1:length(theta)));
 
 
 
