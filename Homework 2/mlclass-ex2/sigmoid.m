@@ -9,9 +9,7 @@ g = zeros(size(z));
 % Instructions: Compute the sigmoid of each value of z (z can be a matrix,
 %               vector or scalar).
 
-
-
-
+g = cell2mat(arrayfun(@(x) { 1.0 / (1.0 + exp(-x)) }, z));
 
 % =============================================================
 
