@@ -36,14 +36,14 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+theta = theta(:);
+y = y(:);
+x = X * theta;
 
-
-
-
-
-
-
-
+J = (1.0 / length(y)) * sum((-1.0*y.*log(sigmoid(x))-((1-y).*log(1-sigmoid(x))))) + ((lambda/(2.0*length(y)))*(dot(theta, theta) - (theta(1)*theta(1))));
+grad = cell2mat(arrayfun(@(n) {(1.0 / length(y)) * sum((sigmoid(x)-y).*X(:,n))}, 1:length(theta)));
+reg = [0 cell2mat(arrayfun(@(n) {((lambda/length(y)) * n)}, theta(2:end)))'];
+grad = grad + reg;
 
 % =============================================================
 
