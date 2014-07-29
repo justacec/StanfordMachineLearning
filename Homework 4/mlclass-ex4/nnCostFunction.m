@@ -68,22 +68,11 @@ ys = cell2mat(arrayfun(@(t) circshift([1 zeros(1,num_labels-1)], [0,t-1]), y, 'U
 H = (-1.0 * ys .* log(h)) - ((1 - ys) .* log(1-h));
 J = (1/m) * sum(sum(H));
 
+% Compute the regularization
+R = (lambda / (2*m)) * (sum(sum(Theta1(:,2:end).*Theta1(:,2:end))) + sum(sum(Theta2(:,2:end).*Theta2(:,2:end))));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+% Add the regularization term to the cost function
+J = J + R;
 
 % -------------------------------------------------------------
 
