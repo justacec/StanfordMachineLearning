@@ -62,6 +62,11 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+a1 = sigmoid((Theta1 * [ones(size(X, 1), 1) X]')');
+h  = sigmoid((Theta2 * [ones(size(a1, 1), 1) a1]')');
+ys = cell2mat(arrayfun(@(t) circshift([1 zeros(1,num_labels-1)], [0,t-1]), y, 'UniformOutput', false));
+H = (-1.0 * ys .* log(h)) - ((1 - ys) .* log(1-h));
+J = (1/m) * sum(sum(H));
 
 
 
