@@ -77,6 +77,19 @@ R = (lambda / (2*m)) * (sum(sum(Theta1(:,2:end).*Theta1(:,2:end))) + sum(sum(The
 % Add the regularization term to the cost function
 J = J + R;
 
+% Perform the backpropogation to compute the gradients
+d3 = h-ys;
+d2 = (d3 * Theta2) .* sigmoidGradient([ones(size(z2,1),1) z2]);
+
+D2 = arrayfun(@(x) d3(x,:)'*[1 a2(x,:)], 1:m, 'UniformOutput', false);
+D2 = (1.0/m) * sum(cat(3,D2{:}),3);
+
+D1 = arrayfun(@(x) d2(x,2:end)'*[1 a1(x,:)], 1:m, 'UniformOutput', false);
+D1 = (1.0/m) * sum(cat(3,D1{:}),3);
+
+Theta1_grad = D1;
+Theta2_grad = D2;
+
 % -------------------------------------------------------------
 
 % =========================================================================
