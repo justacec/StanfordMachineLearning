@@ -87,8 +87,11 @@ D2 = (1.0/m) * sum(cat(3,D2{:}),3);
 D1 = arrayfun(@(x) d2(x,2:end)'*[1 a1(x,:)], 1:m, 'UniformOutput', false);
 D1 = (1.0/m) * sum(cat(3,D1{:}),3);
 
-Theta1_grad = D1;
-Theta2_grad = D2;
+R1 = (lambda / m) * [zeros(size(Theta1,1),1) Theta1(:,2:end)];
+R2 = (lambda / m) * [zeros(size(Theta2,1),1) Theta2(:,2:end)];
+
+Theta1_grad = D1 + R1;
+Theta2_grad = D2 + R2;
 
 % -------------------------------------------------------------
 
