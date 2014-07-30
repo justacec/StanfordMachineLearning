@@ -19,16 +19,8 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
-
-
-
-
-
-
-
-
-
-
+J = (1.0/(2.0*m)) * sum(power((X*theta) - y, 2)) + ((lambda/(2.0*m)) * sum(power(theta(2:end), 2)));
+grad = (1.0/m) * sum(repmat((X*theta - y),1, size(X,2)).*X) + ((lambda/m) * [0; theta(2:end)])';
 
 % =========================================================================
 
