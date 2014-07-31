@@ -15,10 +15,7 @@ X_poly = zeros(numel(X), p);
 %
 % 
 
-
-
-
-
+X_poly = cell2mat(arrayfun(@(j) arrayfun(@(x) power(j, x), 1:p), X, 'UniformOutput', false));
 
 % =========================================================================
 
