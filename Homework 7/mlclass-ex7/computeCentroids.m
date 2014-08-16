@@ -26,12 +26,8 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
-
-
-
-
+t = arrayfun(@(x) mean(X(idx==x,:)), 1:K, 'UniformOutput', false);
+centroids = reshape(cell2mat(t),size(centroids,2),K)';
 
 % =============================================================
 
