@@ -21,11 +21,10 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
+t = arrayfun(@(x) X - repmat(centroids(x,:), size(X,1),1), 1:size(centroids,1), 'UniformOutput', false);
+t = cell2mat(cellfun(@(x) sum(x.*x,2), t, 'UniformOutput', false));
+[~,b] = sort(t, 2);
+idx = b(:,1);
 
 % =============================================================
 
