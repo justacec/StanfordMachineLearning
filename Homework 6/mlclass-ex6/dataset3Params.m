@@ -23,11 +23,31 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+Cs = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+ss = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
 
+resTrain = nan(length(Cs), length(ss));
+resVal = nan(length(Cs), length(ss));
+for(i = 1:length(Cs))
+    for(j = 1:length(ss))
+        C = Cs(i);
+        sigma = ss(j);
+        model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
+        predTrain = svmPredict(model, X);
+        predVal= svmPredict(model, Xval);
+        
+        resTrain(i,j) = mean(double(predTrain ~= y));
+        resVal(i,j) = mean(double(predVal ~= yval));
+    end
+end
 
+[~,ind] = min(resVal(:));
+[I,J] = ind2sub([size(resVal,1) size(resVal,2)],ind);
 
+C = Cs(I);
+sigma = ss(J);
 
-
+fprintf('C = %.2f\tsigma = %.2f\n', C, sigma);
 
 % =========================================================================
 
